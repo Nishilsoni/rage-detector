@@ -1,0 +1,87 @@
+{
+  "name": "keyboard-rage-detector",
+  "displayName": "Keyboard Rage Detector",
+  "description": "Detect keyboard smashing and react with funny interventions.",
+  "version": "0.0.1",
+  "publisher": "nishilsoni",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:rageDetector.showStats",
+    "onCommand:rageDetector.resetStats",
+    "onCommand:rageDetector.triggerRage",
+    "onCommand:rageDetector.reportExternalInput"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "rageDetector.showStats",
+        "title": "Rage Detector: Show Stats"
+      },
+      {
+        "command": "rageDetector.resetStats",
+        "title": "Rage Detector: Reset Stats"
+      },
+      {
+        "command": "rageDetector.showSurvivalMode",
+        "title": "Rage Detector: Open Debug Survival Mode"
+      },
+      {
+        "command": "rageDetector.triggerRage",
+        "title": "Rage Detector: Trigger Manual Rage Event"
+      },
+      {
+        "command": "rageDetector.reportExternalInput",
+        "title": "Rage Detector: Report External Input"
+      }
+    ],
+    "configuration": {
+      "title": "Keyboard Rage Detector",
+      "properties": {
+        "rageDetector.mode": {
+          "type": "string",
+          "enum": ["normal", "cat", "zen", "chaos"],
+          "default": "normal",
+          "description": "Reaction style when rage is detected."
+        },
+        "rageDetector.enableTemporaryLock": {
+          "type": "boolean",
+          "default": true,
+          "description": "Temporarily blocks typing after a detected keyboard smash."
+        },
+        "rageDetector.lockDurationMs": {
+          "type": "number",
+          "default": 3000,
+          "minimum": 500,
+          "description": "How long temporary lock lasts in milliseconds."
+        },
+        "rageDetector.enableFunnyAdvice": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show random funny advice messages."
+        },
+        "rageDetector.enableTerminalDetection": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect rage-like shell commands in terminals with shell integration enabled."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.5.4"
+  }
+}
